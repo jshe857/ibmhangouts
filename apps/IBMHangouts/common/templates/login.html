@@ -1,0 +1,31 @@
+<ion-view title="IBM Hangouts"> 
+
+<ion-content>
+
+<div class="card">
+	<form class="item item-body" name="login" novalidate>
+
+		<div class="circular" ng-style="getImage(switchUser);"></div>
+		<h2 ng-show="!switchUser">John Smith</h2>
+		<div class="list list-inset">
+			<label ng-show="switchUser" class="item item-input"> <i
+				class="icon placeholder-icon energized"
+				ng-class="!login.email.$valid && !login.email.$pristine ? 'ion-alert-circled' : ''"></i>
+				<input name="email" type="email" ng-model="user.email" required
+				placeholder="Email">
+			</label> 
+			<label class="item item-input"> <i
+				class="icon placeholder-icon energized"></i> <input name="password"
+				type="password" required placeholder="Password">
+			</label>
+			<button class="button button-block button-positive"
+				ng-click="validate(user)">Login</button>
+		</div>
+	</form>
+</div>
+
+<div style="text-align: center;">
+	<button class="button button-positive button-clear button-small"
+		ng-click="switchUser=true">Switch User?</button>
+</div>
+</ion-content> </ion-view>

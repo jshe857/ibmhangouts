@@ -1,0 +1,21 @@
+<ion-view title="Profile Setup"> 
+<ion-nav-buttons side="left">
+    <a href="#/login" class="button-icon">
+    <i class="icon ion-ios7-arrow-thin-left positive"></i>
+  </a>
+</ion-nav-buttons>
+<ion-nav-buttons side="right"> 
+<a class="button button-icon" href="#/newsfeed">
+	<i class="icon positive ion-ios7-checkmark-empty"></i>
+</a>
+</ion-nav-buttons> 
+
+<ion-content has-header=true>
+<ion-slide-box on-slide-changed="slideHasChanged($index)">
+<ion-slide>
+<ion-nav-view name="search-wizard"> </ion-nav-view> 
+</ion-slide> <ion-slide>
+<ion-nav-view name="profile-wizard"> </ion-nav-view> 
+</ion-slide> <ion-slide>
+<ion-nav-view name="settings-wizard"> </ion-nav-view> 
+</ion-slide> </ion-slide-box> </ion-content> </ion-view>

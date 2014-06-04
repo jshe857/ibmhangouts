@@ -1,0 +1,17 @@
+<div class="list list-inset">
+	<label class="item item-input"> <i
+		class="icon ion-ios7-cloud positive placeholder-icon"></i> <input
+		type="text" placeholder="Insert More Tags" ng-enter="addToSearch()"
+		ng-model="userSearch">
+	</label>
+</div>
+<div class=card>
+	<h4 class="item item-divider" style="text-align: center;">You are
+		interested in:</h4>
+	<div ng-repeat="tag in tagSearch" class="item item-icon-left">
+		<i style="" class="icon ion-close-circled positive"
+			ng-click=deleteSearchTag(tagSearch[$index])></i> <i
+			class="tag positive"> {{tag}} </i>
+
+	</div>
+</div>

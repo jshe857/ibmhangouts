@@ -1,5 +1,6 @@
 angular.module('Hangouts').factory('TagListFactory', function($http) {
 	var ret = function() {
+		//insert mock tag on initialization
 		var tagList = ['CLOUD'];
 		tagList.load = function() {
 

@@ -17,8 +17,8 @@
 <div ng-hide="noEvents" ng-repeat="event in events" class='card'>
 	<div class="item item-avatar positive cardTitle">
 		<img src="images/cloud.jpg"> {{event.title}}
-		<span style="position: absolute; bottom: 5px; left: 25px;">{{getEventDay(event)}}
-		<p style="font-size:11px;" class="assertive">{{getEventMonth(event)}}</p>
+		<span style="position: absolute; bottom: 5px; left: 25px; color:#ef4e3a">{{getEventDay(event)}}
+		<p style="font-size:11px; ">{{getEventMonth(event)}}</p>
 		</span>
 		<p class="subdued dark">tags: {{event.tags.toString()}}</p> 
 

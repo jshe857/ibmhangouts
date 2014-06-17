@@ -1,0 +1,48 @@
+<ion-view title="Create"> 
+<ion-nav-buttons side="left">
+    <a href="#/newsfeed" class="button-icon">
+    <i class="icon ion-ios7-arrow-left positive"></i>
+  </a>
+</ion-nav-buttons>
+<ion-nav-buttons side="right">
+<div class="button button-clear button-positive icon ion-ios7-checkmark-empty" ng-click="save()"></div>
+</ion-nav-buttons> 
+
+
+<ion-content>
+<form name="create">
+<div class="list">
+	<div class="item item-divider"></div>
+	<div class="item item-input">
+		<span class="input-label"><i
+			class="icon ion-flag"></i> Title</span> <input ng-model="event.title" type="text">
+	</div>
+		<div class="item item-input">
+		<span class="input-label" ><i
+			class="icon ion-ios7-pricetag-outline"></i> Tags</span> <input ng-model="event.tags" type="text" placeholder="cloud,mobile,social">
+	</div>
+	<div class="item item-divider"></div>
+	<div class="item item-input">
+		<span class="input-label"><i class="icon ion-ios7-clock-outline"></i> Start</span>
+		<input ng-model="event.start" type="datetime-local">
+	</div>
+	<div class="item item-input">
+		<span class="input-label"><i class="icon ion-ios7-clock-outline"></i> End</span> 
+		<input ng-model="event.end" type="time">
+	</div>
+<!-- 	<a class="item item-input" href="#/mapsearch"> -->
+<!-- 		<span class="input-label"><i class="icon ion-ios7-location-outline"></i> Location</span> -->
+<!-- 		<div>{{event.location}}</div> -->
+<!-- 	</a>	 -->
+	<div class="item item-input">
+		<span class="input-label"><i class="icon ion-ios7-location-outline"></i> Location</span>
+		<input ng-model="event.location" id="autocomplete-search" type="text">
+	</div>	
+	<div class="item item-divider"></div>
+	<div class="item"><span class="input-label"><i class="icon ion-calendar"></i> Description</span>
+	<textarea rows="3" cols="50" ng-model="event.description"></textarea></div>
+		<div class="item item-divider"></div>
+</div>
+
+</form>	
+</ion-content> </ion-view>

@@ -9,6 +9,14 @@ var hangouts = angular.module('Hangouts', [ 'ionic' ]).config(
 						url: '/newsfeed',
 						templateUrl : 'templates/newsfeed.html',
 						controller : 'NewsfeedCtrl'
+					}).state('create', {
+						url: '/create',
+						templateUrl : 'templates/create.html',
+						controller : 'CreateCtrl'
+					}).state('mapsearch', {
+						url: '/mapsearch',
+						templateUrl : 'templates/mapsearch.html',
+						controller : 'MapCtrl'
 					}).state('settings', {
 						url: '/settings',
 						templateUrl: 'templates/settings.html',

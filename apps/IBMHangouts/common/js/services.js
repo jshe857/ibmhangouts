@@ -1,7 +1,7 @@
-angular.module('Hangouts').factory('TagListFactory', function($http) {
+hangouts.factory('TagListFactory', function($http) {
 	var ret = function() {
-		//insert mock tag on initialization
-		var tagList = ['CLOUD'];
+		// insert mock tag on initialization
+		var tagList = [ 'CLOUD' ];
 		tagList.load = function() {
 
 		};
@@ -22,7 +22,39 @@ angular.module('Hangouts').factory('TagListFactory', function($http) {
 			}
 		};
 		return tagList;
-	}
+	};
 
 	return ret;
+}).factory(
+		'GMapsFactory',
+		function() {
+			var maps = function() {
+				var box = {};
+				box.searchbox = function(input) {
+					var options = {
+						types : [ 'establishment' ],
+						componentRestrictions : {
+							country : 'au'
+						}
+					};
+
+					autocomplete = new google.maps.places.Autocomplete(input,
+							options);
+					google.maps.event.addListener(autocomplete,
+							'place_changed', function() {
+								console.log(autocomplete.getPlace().name);
+							});
+				};
+
+				return box;
+			};
+			return maps;
+
+		}).factory('EventFactory',function(){
+	return function() {
+		var event = {};
+		return event;
+	}
+}).factory('EventParser', function() {
+	
 });

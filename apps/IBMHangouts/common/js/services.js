@@ -30,9 +30,10 @@ hangouts.factory('TagListFactory', function($http) {
 		function() {
 			var maps = function() {
 				var box = {};
-				box.searchbox = function(input) {
+				var autocomplete = "";
+				box.searchbox = function(input,event) {
 					var options = {
-						types : [ 'establishment' ],
+//						types : [ 'establishment' ],
 						componentRestrictions : {
 							country : 'au'
 						}
@@ -43,9 +44,9 @@ hangouts.factory('TagListFactory', function($http) {
 					google.maps.event.addListener(autocomplete,
 							'place_changed', function() {
 								console.log(autocomplete.getPlace().name);
+								event.location = autocomplete.getPlace().name
 							});
 				};
-
 				return box;
 			};
 			return maps;

@@ -30,11 +30,11 @@ hangouts
 					//
 					// });
 				})
-		.controller('LoginCtrl', function($scope, $http, $location) {
+		.controller('LoginCtrl', function($scope, $http, $state) {
 			$scope.validate = function(user) {
 				// more authentication to be implemented
 				if (true) {
-					$location.path('/wizard/setup');
+					$state.go('wizard.setup');
 				} else {
 					alert("Invalid Login");
 				}
@@ -66,7 +66,7 @@ hangouts
 				$scope.userSearch = "";
 			};
 		})
-		.controller('NewsfeedCtrl', function($scope, $ionicSideMenuDelegate) {
+		.controller('NewsfeedCtrl', function($rootScope,$scope, $ionicSideMenuDelegate) {
 			$scope.toggleLeft = function() {
 				$ionicSideMenuDelegate.toggleLeft();
 			};
@@ -77,7 +77,7 @@ hangouts
 				if(typeof event != 'undefined' && typeof event.start != 'undefined') {
 					return event.start.split('T')[1];
 				} else {
-					return '00:00';
+					return 'Early';
 				}
 			};
 			$scope.getEndTime = function(event) {
@@ -120,7 +120,7 @@ hangouts
 				}
 			};
 			$scope.showDetails = function(index) {
-				$scope.currEvent = $scope.events[index];
+				$rootScope.currEvent = $scope.events[index];
 				$scope.showMap = false;
 				$ionicSideMenuDelegate.toggleRight();
 			};
@@ -143,18 +143,18 @@ hangouts
 		})
 		.controller(
 				'CreateCtrl',
-				function($scope, $rootScope, $location, GMapsFactory,
+				function($scope, $rootScope, $state, GMapsFactory,
 						EventFactory) {
 					$scope.event = new EventFactory();
 					var maps = new GMapsFactory();
 					maps.searchbox(document
-							.getElementById('autocomplete-search'));
+							.getElementById('autocomplete-search'),$scope);
 					$scope.save = function() {
 						if (typeof $scope.event.title == 'undefined') {
-							$scope.event.title='Untitled'
+							$scope.event.title='Untitled';
 						}
 						$rootScope.events.push($scope.event);
-						$location.path('/newsfeed');
+						$state.go('newsfeed.main');
 					};
 
 				})
@@ -168,7 +168,7 @@ hangouts
 					// maps.init(document.getElementById('map-search'),document.getElementById('map-canvas'));
 					var markers = [];
 					var map = new google.maps.Map(document
-							.getElementById('map-canvas'), {
+							 .getElementById('map-canvas'), {
 						mapTypeId : google.maps.MapTypeId.ROADMAP
 					});
 

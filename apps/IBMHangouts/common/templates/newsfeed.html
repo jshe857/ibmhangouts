@@ -1,112 +1,50 @@
-<ion-view hide-nav-bar="true" hide-back-button="true" title="Events">
-
-
-<ion-side-menus> 
-<ion-side-menu-content drag-content="false">
-<ion-header-bar class="bar-light">
-<button class="button button-icon" ng-click="toggleLeft()">
-	<i class="icon positive ion-navicon"></i>
-</button>
-<h1 class="title">Events</h1>
-<a class="button button-clear button-positive icon ion-ios7-plus-empty" href="#/create">
-</a>
-
-</ion-header-bar> 
-
-<ion-content has-header="true">
-<div class="card">
-	<div ng-hide="noPeople" class="item cardTitle item-avatar positive">
-		John Smith is in Sydney <img src="images/example.jpg">
-		<p>tags: agile, scrum, tdd</p>
-	</div>	
-</div>
-<div ng-hide="noEvents" ng-repeat="event in events" class='card'>
-	<div class="item item-avatar positive cardTitle">
-		<img src="images/cloud.jpg"> {{event.title}}
-		<span style="position: absolute; bottom: 5px; left: 25px; color:#ef4e3a">{{getEventDay(event)}}
-		<p style="font-size:11px;">{{getEventMonth(event)}}</p>
-		</span>
-		
-		<p class="subdued dark">tags: {{event.tags.toString()}}</p> 
-
-		<p style="color: #538DEE;">where: {{event.location}}
-<!-- 				<span style="text-align:right; float:right; margin-left: 10px">{{getEventTime(event)}}</span> -->
-		</p>
-		
-	</div>
-
-
-	<div class="item tabs tabs-secondary tabs-icon-left">
-		<a class="tab-item "> <i class="icon ion-ios7-personadd" ></i>
-			Attend
-		</a> <a class="tab-item " ng-click="showDetails($index);"> <i
-			class="icon ion-ios7-information"></i> Details
-		</a>
-	</div>
-
-
-</div>
-</ion-content> </ion-side-menu-content> 
-
-<ion-side-menu side="left">
-<ion-content>
-<div class="list">
-	<div class="item item-input-inset">
-		<label class="item-input-wrapper"> <i
-			class="icon ion-search placeholder-icon"></i> <input type="text"
-			placeholder="Search">
-		</label>
-	</div>
-</div>
-<div class="circular"></div>
-<button class="button button-full button-clear button-positive"
-	style="text-align: left; padding-left: 75px">My Events</button>
-<a class="button button-full button-clear button-positive"
-	style="text-align: left; padding-left: 75px" href="#/wizard/setup">Update Tags</a>
-<a class="button button-full button-clear button-positive"
-	style="text-align: left; padding-left: 75px" href="#/settings">Settings</a>
-<a class="button button-full button-clear button-assertive"
-	href="#/login" style="text-align: left; padding-left: 75px">Logout</a>
-	</ion-content>
-</ion-side-menu> 
-<ion-side-menu side="right" style="background:#EEE">
-<ion-header-bar class="bar-light">
-<button class="button button-icon" ng-click="toggleRight()">
-	<i class="icon positive ion-ios7-arrow-left"></i>
-</button>
-<h1 class="title">{{currEvent.title}}</h1>
-<button class="button button-icon" ng-click="toggleRight()">
-	<i class="icon positive ion-ios7-personadd-outline"></i>
-</button>
-
-</ion-header-bar> 
-<ion-content has-header="true">
-
-<div class="card">
-	<div class="item">
-	<p>
-		<i class="icon ion-calendar"></i>
-		{{getDetailedTime(currEvent)}}
-	</p>
-	
-	</div>
-	<div class="item">
-		<p>
-		<i class="icon item-icon ion-location"></i> {{currEvent.location}}
-		<a style="float:right; color:#4A87EE" ng-click="toggleMap()">{{mapToggleText}}</a>
-		</p>
-	</div>
-	<div class="item" ng-show="showMap">
-		<img class="full-image" src="images/gmap.jpg">
-	</div>
-</div>
-<div class="card">
-	<div class="item item-body">
-	<div style="font-weight:700; padding-bottom:5px">Description:</div>
-		{{currEvent.description}}
-	</div>
-</div>
-</ion-content>
-</ion-side-menu>
-
-</ion-side-menus> </ion-view>
+<!-- <ion-view hide-nav-bar="true" hide-back-button="true" title="Events"> -->
+  
+  
+  <ion-side-menus>
+	<ion-side-menu-content>
+       <ion-nav-view name="feed-content"></ion-nav-view>
+      </ion-side-menu-content>
+      
+      
+      <ion-side-menu side="left">
+       <ion-view hide-nav-bar="true">
+			<ion-content has-header="true">
+			     <div class="list">
+			    <div class="item item-input-inset">
+			      <label class="item-input-wrapper">
+			        <i	
+			        class="icon ion-search placeholder-icon">
+			        </i>
+			        
+			        <input type="text"
+			        placeholder="Search">
+			      </label>
+			    </div>
+			  </div>
+			  <div class="circular">
+			  </div>
+			  <button class="button button-full button-clear button-positive"
+			  style="text-align: left; padding-left: 75px">
+			    My Events
+			  </button>
+			  <a class="button button-full button-clear button-positive"
+			  style="text-align: left; padding-left: 75px" href="#/wizard/setup">
+			    Update Tags
+			  </a>
+			  <a class="button button-full button-clear button-positive"
+			  style="text-align: left; padding-left: 75px" href="#/settings">
+			    Settings
+			  </a>
+			  <a class="button button-full button-clear button-assertive"
+			  href="#/login" style="text-align: left; padding-left: 75px">
+			    Logout
+			  </a>
+			</ion-content>
+		</ion-view>
+      </ion-side-menu>
+      
+      <ion-side-menu side="right" style="background:#EEE">
+       <ion-nav-view name="feed-details"></ion-nav-view>
+      </ion-side-menu>
+      </ion-side-menus>

@@ -63,15 +63,25 @@ hangouts
 
 			};
 		})
-		.controller('TagCtrl', function($rootScope, $scope, TagListFactory) {
+		.controller('TagSearchCtrl', function($rootScope, $scope, TagListFactory) {
 			$scope.tagSearch = new TagListFactory();
 			$scope.deleteSearchTag = function(tagName) {
 				$scope.tagSearch.remove(tagName);
 			};
-			$scope.addToSearch = function() {
-				$scope.tagSearch.add($scope.userSearch);
-				$scope.userSearch = "";
+			$scope.addToSearch = function(input) {
+				$scope.tagSearch.add(input);
 			};
+			$scope.tagDescriptor = "You Are Interested In:";
+		})
+		.controller('TagProfileCtrl', function($rootScope, $scope, TagListFactory) {
+			$scope.tagSearch = new TagListFactory();
+			$scope.deleteSearchTag = function(tagName) {
+				$scope.tagSearch.remove(tagName);
+			};
+			$scope.addToSearch = function(input) {
+				$scope.tagSearch.add(input);
+			};
+			$scope.tagDescriptor = "You Are An Expert In:";
 		})
 		.controller(
 				'NewsfeedCtrl',

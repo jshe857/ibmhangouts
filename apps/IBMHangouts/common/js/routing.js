@@ -47,11 +47,11 @@ var hangouts = angular.module('Hangouts', [ 'ionic' ]).config(
 						views : {
 							'search-wizard' : {
 								templateUrl : "templates/tagSetup.html",
-								controller : 'TagCtrl'
+								controller : 'TagSearchCtrl'
 							},
 							'profile-wizard' : {
 								templateUrl : "templates/tagSetup.html",
-								controller : 'TagCtrl'
+								controller : 'TagProfileCtrl'
 							},
 							'settings-wizard' : {
 								templateUrl : "templates/settings.html",

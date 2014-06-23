@@ -6,6 +6,7 @@ hangouts.directive('ngEnter', function () {
             if(event.which === 13 || event.which === 32) {
                 scope.$apply(function (){
                     scope.$eval(attrs.ngEnter);
+                    element.val("");
                 });
 
                 event.preventDefault();

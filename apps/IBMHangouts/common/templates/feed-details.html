@@ -7,12 +7,16 @@
             Back
      </button>
      <h1 class="title">
-       {{currEvent.title}}
+       {{currEvent.getTitle()}}
      </h1>
-     <button class="button button-icon" ng-click="toggleRight()">
+     <button ng-if="user.email != currEvent.getCreatorEmail()" class="button button-icon" ng-click="toggleRight()">
        <i class="icon positive ion-ios7-personadd-outline">
        </i>
      </button>
+     <a ng-if="user.email == currEvent.getCreatorEmail()" class="button button-clear button-positive" style="font-size:13px" href="#/edit">
+         Edit
+     </a>
+     
      
 </ion-header-bar>
 
@@ -23,7 +27,7 @@
       <p>
         <i class="icon ion-calendar">
         </i>
-        {{getDetailedTime(currEvent)}}
+        {{currEvent.getDetailedTime()}}
       </p>
       
     </div>
@@ -31,13 +35,13 @@
       <p>
         <i class="icon item-icon ion-location">
         </i>
-        {{currEvent.location}}
+        {{currEvent.getLocation()}}
         <a style="float:right; color:#4A87EE" ng-click="toggleMap()">
           {{mapToggleText}}
         </a>
       </p>
     </div>
-    <div class="item" ng-show="showMap">
+    <div class="item" ng-if="showMap">
       <img class="full-image" src="images/gmap.jpg">
     </div>
   </div>
@@ -46,7 +50,7 @@
       <div style="font-weight:700; padding-bottom:5px">
         Description:
       </div>
-      {{currEvent.description}}
+      {{currEvent.getDescription()}}
     </div>
   </div>
 </ion-content>

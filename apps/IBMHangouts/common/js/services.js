@@ -1,3 +1,11 @@
+var months = [ 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP',
+		'OCT', 'NOV', 'DEC' ];
+var fullMonths = [ 'January', 'February', 'March', 'April', 'May', 'June',
+		'July', 'August', 'September', 'October', 'November', 'December' ];
+
+var weekday = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+		"Friday", "Saturday" ];
+
 hangouts.factory('TagListFactory', function($http) {
 	var ret = function() {
 		// insert mock tag on initialization
@@ -33,7 +41,6 @@ hangouts.factory('TagListFactory', function($http) {
 				var autocomplete = "";
 				box.searchbox = function(input,event) {
 					var options = {
-//						types : [ 'establishment' ],
 						componentRestrictions : {
 							country : 'au'
 						}
@@ -43,7 +50,7 @@ hangouts.factory('TagListFactory', function($http) {
 							options);
 					google.maps.event.addListener(autocomplete,
 							'place_changed', function() {
-								console.log(autocomplete.getPlace().name);
+								console.log(autocomplete.getPlace());
 								event.location = autocomplete.getPlace().name
 							});
 				};
@@ -55,7 +62,96 @@ hangouts.factory('TagListFactory', function($http) {
 	return function() {
 		var event = {};
 		return event;
-	}
+	};
 }).factory('EventParser', function() {
+	 var parse = function(eventData){
+		var event = eventData;
+		this.toForm = function() {
+			return event;
+		};
+		
+		this.getLocation = function() {
+			if (typeof event.location != 'undefined') {
+				return event.location;
+			} else{
+				return 'TBD';
+			}
+		}
+		this.getTitle = function() {
+			if (typeof event.title != 'undefined') {
+				return event.title;
+			} else {
+				return 'Untitled';
+			}
+		}
+		this.getEventTime = function() {
+			if (typeof event != 'undefined'
+					&& typeof event.start != 'undefined') {
+				return event.start.split('T')[1];
+			} else {
+				return 'Early';
+			}
+		};
+		this.getEndTime = function() {
+			if (typeof event != 'undefined'
+					&& typeof event.start != 'undefined') {
+				return event.end;
+			} else {
+				return 'Late';
+			}
+		};
+		this.getEventMonth = function() {
+			if (typeof event != 'undefined'
+					&& typeof event.start != 'undefined') {
+				var index = (event.start).split('-')[1];
+				return months[parseInt(index)];
+			} else {
+				return 'N/A';
+			}
+		};
+		this.getEventDay = function() {
+			if (typeof event != 'undefined'
+					&& typeof event.start != 'undefined') {
+				var temp = String(event.start).split('-')[2];
+				return temp.split('T')[0];
+			} else {
+				return '00';
+			}
+		};
+		this.getDayOfWeek = function() {
+
+		};
+		this.getDetailedTime = function() {
+			return this.getEventDay() + ' '
+					+ this.getEventFullMonth() + ', '
+					+ this.getEventTime() + ' - '
+					+ this.getEndTime();
+		};
+		this.getEventFullMonth = function() {
+			if (typeof event != 'undefined'
+					&& typeof event.start != 'undefined') {
+				var index = (event.start).split('-')[1];
+				return fullMonths[parseInt(index)];
+			} else {
+				return 'N/A';
+			}
+		};
+		this.getDescription = function() {
+			return event.description;
+		};
+		this.getTags = function() {
+			if (typeof event.tags != 'undefined') {
+				return event.tags.toString();
+			}
+		};
+		this.getCreatorEmail = function() {
+			return event.creatorEmail;
+		};
+		this.getCreatorName = function() {
+			return event.creatorName;
+		};
+		
+	};
+	return parse;
 	
 });

@@ -17,19 +17,19 @@ var hangouts = angular.module('Hangouts', [ 'ionic' ]).config(
 								templateUrl: "templates/feed-content.html",
 								controller : 'NewsfeedCtrl'
 							},
-							'feed-menu': {
-								templateUrl: "templates/feed-menu.html"
-							},
 							'feed-details': {
 								templateUrl: "templates/feed-details.html",
-								controller : 'NewsfeedCtrl'
-
+								controller : 'DetailsCtrl'
 							}
 						}
 					}).state('create', {
 						url: '/create',
 						templateUrl : 'templates/create.html',
 						controller : 'CreateCtrl'
+					}).state('edit', {
+						url: '/edit',
+						templateUrl : 'templates/create.html',
+						controller : 'EditCtrl'
 					}).state('mapsearch', {
 						url: '/mapsearch',
 						templateUrl : 'templates/mapsearch.html',

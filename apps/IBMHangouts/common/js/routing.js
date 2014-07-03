@@ -5,7 +5,12 @@ var hangouts = angular.module('Hangouts', [ 'ionic' ]).config(
 						url : '/login',
 						templateUrl : 'templates/login.html',
 						controller : 'LoginCtrl'
-					}).state('newsfeed', {
+					}).state('register',{
+						url : '/register',
+						templateUrl : 'templates/register.html',
+						controller : 'RegisterCtrl'
+					})
+					.state('newsfeed', {
 						url: '/newsfeed',
 						abstract : true,
 						templateUrl : 'templates/newsfeed.html',
@@ -42,6 +47,7 @@ var hangouts = angular.module('Hangouts', [ 'ionic' ]).config(
 						url : '/wizard',
 						abstract : true,
 						templateUrl : 'templates/wizard.html',	
+						controller : 'WizardCtrl'
 					}).state('wizard.setup', {
 						url : "/setup",
 						views : {
@@ -52,9 +58,6 @@ var hangouts = angular.module('Hangouts', [ 'ionic' ]).config(
 							'profile-wizard' : {
 								templateUrl : "templates/tagSetup.html",
 								controller : 'TagProfileCtrl'
-							},
-							'settings-wizard' : {
-								templateUrl : "templates/settings.html",
 							}
 						}
 					});

@@ -9,11 +9,11 @@
      <h1 class="title">
        {{currEvent.getTitle()}}
      </h1>
-     <button ng-if="user.email != currEvent.getCreatorEmail()" class="button button-icon" ng-click="toggleRight()">
+     <button ng-if="user.username != currEvent.getCreatorEmail()" class="button button-icon" ng-click="toggleRight()">
        <i class="icon positive ion-ios7-personadd-outline">
        </i>
      </button>
-     <a ng-if="user.email == currEvent.getCreatorEmail()" class="button button-clear button-positive" style="font-size:13px" href="#/edit">
+     <a ng-if="user.username == currEvent.getCreatorEmail()" class="button button-clear button-positive" style="font-size:13px" href="#/edit">
          Edit
      </a>
      

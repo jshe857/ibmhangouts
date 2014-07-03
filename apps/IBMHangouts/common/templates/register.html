@@ -1,0 +1,58 @@
+<ion-view title="New User">
+<ion-nav-buttons side="left">
+    <button ui-sref="login" class="button button-icon">
+    <i class="icon ion-ios7-arrow-left positive"></i>
+    </button>
+</ion-nav-buttons>
+<ion-content>
+<div class="card">
+  <form class="item item-body" name="register" novalidate>
+    <div class="list list-inset">
+      <label class="item item-input">
+        <i
+        class="icon placeholder-icon balanced"
+        ng-class="register.name.$valid ? 'ion-checkmark-circled' : ''">
+        </i>
+        
+        <input
+        name="name" type="text" ng-model="newUser.name" required 
+        placeholder="Name">
+      </label>
+      
+      <label class="item item-input">
+        <i class="icon placeholder-icon balanced"
+        ng-class="register.email.$valid ? 'ion-checkmark-circled' : ''">
+        </i>
+        <input name="email" type="email" ng-model="newUser.email" required
+        placeholder="Email">
+      </label>
+      
+      <label class="item item-input">
+        
+        <i
+        class="icon placeholder-icon balanced"
+        ng-class="register.password.$valid ? 'ion-checkmark-circled' : ''">
+        </i>
+        <input name="password" type="password" required
+        placeholder="Password 8-16 Characters" ng-model="newUser.pw"
+        password-valid>
+      </label>
+      
+      <label class="item item-input">
+        
+        <i
+        class="icon placeholder-icon balanced"
+        ng-class="newUser.pwconfirm && newUser.pw == newUser.pwconfirm ? 'ion-checkmark-circled' : ''">
+        </i>
+        <input name="passwordconfirm" type="password" required
+        placeholder="Confirm Password" ng-model="newUser.pwconfirm">
+      </label>
+      <button ng-disabled="!register.$valid || (newUser.pw != newUser.pwconfirm)"
+      class="button button-block button-positive" ng-click="submit(newUser)">
+        Register
+      </button>
+    </div>
+  </form>
+  </div>
+</ion-content>
+</ion-view>

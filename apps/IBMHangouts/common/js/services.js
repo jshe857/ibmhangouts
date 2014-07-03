@@ -1,3 +1,7 @@
+
+var restURL = 'http://ibmhangouts.stage1.mybluemix.net/ibmhangouts';
+//var restURL = 'http://localhost:3000';
+
 var months = [ 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP',
 		'OCT', 'NOV', 'DEC' ];
 var fullMonths = [ 'January', 'February', 'March', 'April', 'May', 'June',
@@ -7,9 +11,15 @@ var weekday = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
 		"Friday", "Saturday" ];
 
 hangouts.factory('TagListFactory', function($http) {
-	var ret = function() {
+	var ret = function(tags) {
 		// insert mock tag on initialization
-		var tagList = [ 'CLOUD' ];
+		var tagList = [];
+		if (tags) {
+			for(var i =0; i < tags.length; i++) {
+				tagList.push(tags[i]);
+			}
+		}
+		
 		tagList.load = function() {
 
 		};
@@ -145,13 +155,37 @@ hangouts.factory('TagListFactory', function($http) {
 			}
 		};
 		this.getCreatorEmail = function() {
-			return event.creatorEmail;
+			return event.username;
 		};
 		this.getCreatorName = function() {
-			return event.creatorName;
+			return event.name;
 		};
 		
 	};
 	return parse;
 	
+}).factory('UserService',function($http,$rootScope) {
+	return {
+		login : function(username,password) {
+			delete $rootScope.user.password;
+        	return $http.post(restURL + '/login', {username: username, password: password});    
+		},
+		register : function(username,password,name) {
+			return $http.post(restURL + '/register', {username: username, password: password, name:name});    
+		},
+		update : function(user) {
+			delete user.password;
+			return $http.post(restURL + '/updateUser', {user:user});
+		}
+	};
+}).factory('EventService',function($http,$rootScope){
+	return {
+		create : function(event) {
+			return $http.post(restURL+'/createEvent',{event:event});
+		},
+		retrieve: function(user) {
+			console.log(user.username);
+			return $http.post(restURL+'/getUserEvent',{username:user.username});
+		}
+	};
 });

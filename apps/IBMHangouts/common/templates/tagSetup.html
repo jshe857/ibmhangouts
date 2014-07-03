@@ -8,9 +8,9 @@
 </div>
 <div class=card>
 	<h4 class="item item-divider" style="text-align: center;">{{tagDescriptor}}</h4>
-	<div ng-repeat="tag in tagSearch" class="item item-icon-left">
+	<div ng-repeat="tag in tags" class="item item-icon-left">
 		<i style="" class="icon ion-close-circled positive"
-			ng-click=deleteSearchTag(tagSearch[$index])></i> <i
+			ng-click=deleteTag(tag)></i> <i
 			class="tag positive"> {{tag}} </i>
 
 	</div>

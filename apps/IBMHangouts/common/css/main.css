@@ -52,7 +52,7 @@ body {
 .cardTitle {
 	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
 	font-weight: "bold";
-	color: #4A87EE;	
+	color: #4A87EE;
 }
 
 textarea {
@@ -93,7 +93,7 @@ textarea {
 
 .pac-container {
 	font-family: Roboto;
-	z-index:9999;
+	z-index: 9999;
 }
 
 #type-selector {
@@ -109,7 +109,10 @@ textarea {
 }
 
 .item .item-icon {
-	font-size:20px
+	font-size: 20px
 }
 
-	
+input[type="email"]:disabled {
+	background-color: white;
+	color: #DDD;
+}

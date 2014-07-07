@@ -184,8 +184,10 @@ hangouts.factory('TagListFactory', function($http) {
 			return $http.post(restURL+'/createEvent',{event:event});
 		},
 		retrieve: function(user) {
-			console.log(user.username);
 			return $http.post(restURL+'/getUserEvent',{username:user.username});
+		},
+		update : function(event) {
+			return $http.post(restURL + '/updateEvent',{event:event});
 		}
 	};
 });

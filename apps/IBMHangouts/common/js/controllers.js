@@ -16,8 +16,6 @@ hangouts
 							}) ];
 
 					$rootScope.user = {
-//						username : 'johnsmith@au1.ibm.com',
-//						name : 'John Smith'
 					};
 
 				})
@@ -29,7 +27,6 @@ hangouts
 						if (user && user.username && user.password) {
 							UserService.login(user.username, user.password)
 									.success(function(data) {
-										console.log(data);
 										$rootScope.user = data;
 										if (data.searchTags.length) {
 											$state.go('newsfeed.main');
@@ -67,14 +64,14 @@ hangouts
 					$scope.submit = function(user) {
 						delete $scope.newUser;
 						UserService.register(user.email, user.pw, user.name)
-								.success(function(data) {
-									alert(data);
-									$state.go('login');
-								}).error(function(status, data) {
-									console.log(status);
-									console.log(data);
-									alert("Registration Failed");
-								});
+						.success(function(data) {
+							alert(data);
+							$state.go('login');
+						}).error(function(status, data) {
+							console.log(status);
+							console.log(data);
+							alert("Registration Failed");
+						});
 					};
 				})
 		.controller('TagSearchCtrl', function($scope, TagListFactory) {
@@ -102,8 +99,8 @@ hangouts
 		.controller('NewsfeedCtrl',
 				function($rootScope, $scope, $ionicSideMenuDelegate,EventService,EventParser) {
 					EventService.retrieve($scope.user).success(function (data) {
-						console.log(data);
 						if (data) {
+							$scope.events=[];
 							for(var i =0; i<data.length;i++) {
 								$scope.events.push(new EventParser(data[i]));
 							}
@@ -138,18 +135,16 @@ hangouts
 					};
 
 				})
-		.controller('SettingsCtrl', function($scope, $state) {
-		})
 		.controller(
 				'CreateCtrl',
 				function($scope, $rootScope, $state, GMapsFactory,EventService) {
+					$scope.createMode="Create";
 					$scope.event = {};
 					var maps = new GMapsFactory();
 					maps.searchbox(document
 							.getElementById('autocomplete-search'),
 							$scope.event);
 					$scope.save = function() {
-						if (typeof $scope.user != 'undefined') {
 							$scope.event.name = $scope.user.name;
 							$scope.event.username = $scope.user.username;
 							EventService.create($scope.event).success(function(data) {
@@ -158,22 +153,21 @@ hangouts
 								alert(data);
 								$state.go('newsfeed.main');
 							});				
-						} else {
-							alert('No User Logged In!');
-							$state.go('login');
-						}
 					};
 
 				})
 		.controller(
 				'EditCtrl',
-				function($scope, $rootScope, $state, GMapsFactory, EventParser) {
+				function($scope, $rootScope, $state, GMapsFactory, EventService) {
+					$scope.createMode="Edit";
 					$scope.event = angular.copy($rootScope.currEvent.toForm());
 					$scope.save = function() {
-						var index = $rootScope.events
-								.indexOf($rootScope.currEvent);
-						$rootScope.events[index] = (new EventParser(
-								$scope.event));
+						EventService.update($scope.event).success(function(data) {
+							$state.go('newsfeed.main');
+						}).error(function(data){
+							alert(data);
+							$state.go('newsfeed.main');
+						});			
 						$state.go('newsfeed.main');
 					};
 					var maps = new GMapsFactory();

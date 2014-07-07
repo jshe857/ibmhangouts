@@ -1,67 +1,82 @@
 <ion-view>
+  
   <ion-header-bar>
     <button class="button button-icon" ng-click="toggleLeft()">
-    <i class="icon positive ion-navicon">
-    </i>
+      <i class="icon positive ion-navicon">
+        
+      </i>
     </button>
-    <h1 class="title positive">Events</h1>
-    <a class="button button-clear button-positive icon ion-ios7-plus-empty" href="#/create"></a>
+    <h1 class="title positive">
+      Events
+    </h1>
+    <a class="button button-clear button-positive icon ion-ios7-plus-empty"
+	href="#/create">
+  </a>
+  
   </ion-header-bar>
+  
   <ion-content has-header="true">
     <div class="card">
       <div class="item cardTitle item-avatar positive">
-        John Smith is in Sydney 
-        <img src="images/example.jpg">
-        <p>
-          tags: agile, scrum, tdd
+		John Smith is in Sydney 
+      <img src="images/example.jpg">
+      <p>
+        tags: agile, scrum, tdd
+      </p>
+  </div>
+  
+  </div>
+  <div ng-repeat="event in events" class='card'>
+	<div class="item item-avatar positive cardTitle">
+      <img src="images/cloud.jpg">
+      {{event.getTitle()}} 
+      <span
+      style="position: absolute; bottom: 5px; left: 25px; color: #ef4e3a">
+        {{event.getEventDay()}}
+        <p style="font-size: 11px;">
+          {{event.getEventMonth()}}
         </p>
-      </div>
+      </span>
       
-        </div>
-        <div ng-repeat="event in events" class='card'>
-          <div class="item item-avatar positive cardTitle">
-            <img src="images/cloud.jpg">
-            {{event.getTitle()}}
-            <span style="position: absolute; bottom: 5px; left: 25px; color:#ef4e3a">
-              {{event.getEventDay()}}
-              <p style="font-size:11px;">
-                {{event.getEventMonth()}}
-              </p>
-          </span>
-          
-          <p class="subdued dark">
-            tags: {{event.getTags()}}
-          </p>
-          
-          
-          <p style="color: #538DEE;">
-            where: {{event.getLocation()}}
-            <!-- 				
+      <p class="subdued dark">
+        tags: {{event.getTags()}}
+      </p>
+      
+      
+      <p style="color: #538DEE;">
+        where: {{event.getLocation()}}
+        <!-- 				
 <span style="text-align:right; float:right; margin-left: 10px">
 {{getEventTime(event)}}
 </span>
 -->
-          </p>
-          
-        </div>
+      </p>
+      
+  </div>
+  
+  
+  <div class="item tabs tabs-secondary tabs-icon-left">
+    <div class="tab-item ">
+      
+      <i class="icon ion-ios7-personadd">
         
+      </i>
+      Attend
+    </div>
+    
+    <div class="tab-item " ng-click="showDetails($index);">
+      
+      <i class="icon ion-ios7-information">
         
-        <div class="item tabs tabs-secondary tabs-icon-left">
-          <div class="tab-item ">
-            
-            <i class="icon ion-ios7-personadd" >
-            </i>
-            Attend
-          </div>
-          
-          <div class="tab-item " ng-click="showDetails($index);">
-            
-            <i
-            class="icon ion-ios7-information">
-            </i>
-            Details
-          </div>
-        </div>
-        </div>
-     </ion-content>
+      </i>
+      Details
+    </div>
+  </div>
+  </div>
+  <div class="loading-spinner-holder" loading-screen>
+	<i class="icon ion-loading-c">
+  </i>
+  </div>
+  </ion-content>
+  
 </ion-view>

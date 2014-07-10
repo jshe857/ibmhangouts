@@ -3,17 +3,7 @@ hangouts
 				'MainCtrl',
 				function($rootScope, $http, EventParser, UserService) {
 					// mock data
-					$rootScope.events = [ new EventParser(
-							{
-								title : "Smarter Cloud",
-								username : "john@au1.ibm.com",
-								name : "John Smith2",
-								end : "14:12",
-								start : "2014-02-23T13:12",
-								location : "NH11.04",
-								tags : [ "smart", "cloud" ],
-								description : "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-							}) ];
+					$rootScope.events = [];
 
 					$rootScope.user = {
 					};
@@ -97,7 +87,7 @@ hangouts
 			$scope.tagDescriptor = "You Are An Expert In:";
 		})
 		.controller('NewsfeedCtrl',
-				function($rootScope, $scope, $ionicSideMenuDelegate,EventService,EventParser) {
+				function($rootScope, $scope, snapRemote,EventService,EventParser,$state) {
 					EventService.retrieve($scope.user).success(function (data) {
 						if (data) {
 							$scope.events=[];
@@ -105,17 +95,19 @@ hangouts
 								$scope.events.push(new EventParser(data[i]));
 							}
 						}
+					}).error(function(data) {
+						alert(data);
+						$state.go('login');
 					});
-					
 					$scope.toggleLeft = function() {
-						$ionicSideMenuDelegate.toggleLeft();
+						snapRemote.toggle('left');
 					};
 					$scope.toggleRight = function() {
-						$ionicSideMenuDelegate.toggleRight();
+						snapRemote.toggle('right');
 					};
 					$scope.showDetails = function(index) {
 						$rootScope.currEvent = $scope.events[index];
-						$ionicSideMenuDelegate.toggleRight();
+						snapRemote.toggle('right');
 					};
 				})
 		.controller('DetailsCtrl',
@@ -123,6 +115,8 @@ hangouts
 					$scope.toggleRight = function() {
 						$ionicSideMenuDelegate.toggleRight();
 					};
+					console.log('IN SIDE MENU!')
+					console.log($scope.currEvent);
 					$scope.mapToggleText = "Show Map";
 					$scope.toggleMap = function() {
 						if ($scope.showMap) {
@@ -133,6 +127,10 @@ hangouts
 						$scope.showMap = !$scope.showMap;
 						$ionicScrollDelegate.resize();
 					};
+					$scope.remove = function() {
+						
+					};
+					
 
 				})
 		.controller(
@@ -154,7 +152,7 @@ hangouts
 								$state.go('newsfeed.main');
 							});				
 					};
-
+					
 				})
 		.controller(
 				'EditCtrl',

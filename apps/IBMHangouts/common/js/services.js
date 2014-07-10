@@ -19,13 +19,6 @@ hangouts.factory('TagListFactory', function($http) {
 				tagList.push(tags[i]);
 			}
 		}
-		
-		tagList.load = function() {
-
-		};
-		tagList.save = function() {
-
-		};
 		tagList.add = function(tagName) {
 			var str = tagName.toUpperCase();
 			if (this.indexOf(str) == -1 && str.length != 0) {
@@ -93,7 +86,7 @@ hangouts.factory('TagListFactory', function($http) {
 			} else {
 				return 'Untitled';
 			}
-		}
+		};
 		this.getEventTime = function() {
 			if (typeof event != 'undefined'
 					&& typeof event.start != 'undefined') {

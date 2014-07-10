@@ -1,4 +1,4 @@
-var hangouts = angular.module('Hangouts', [ 'ionic' ]).config(
+var hangouts = angular.module('Hangouts', [ 'ionic','snap' ]).config(
 		[ '$stateProvider', '$urlRouterProvider',
 				function($stateProvider, $urlRouterProvider) {
 					$stateProvider.state('login', {
@@ -42,7 +42,6 @@ var hangouts = angular.module('Hangouts', [ 'ionic' ]).config(
 					}).state('settings', {
 						url: '/settings',
 						templateUrl: 'templates/settings.html',
-						controller : 'SettingsCtrl'
 					}).state('wizard', {
 						url : '/wizard',
 						abstract : true,

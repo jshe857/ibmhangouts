@@ -1,5 +1,4 @@
-<ion-view>
-  
+<ion-view hide-nav-bar="true">
   <ion-header-bar>
     <button class="button button-icon" ng-click="toggleLeft()">
       <i class="icon positive ion-navicon">
@@ -14,7 +13,6 @@
   </a>
   
   </ion-header-bar>
-  
   <ion-content has-header="true">
     <div class="card">
       <div class="item cardTitle item-avatar positive">
@@ -24,7 +22,6 @@
         tags: agile, scrum, tdd
       </p>
   </div>
-  
   </div>
   <div ng-repeat="event in events" class='card'>
 	<div class="item item-avatar positive cardTitle">
@@ -37,12 +34,9 @@
           {{event.getEventMonth()}}
         </p>
       </span>
-      
       <p class="subdued dark">
         tags: {{event.getTags()}}
-      </p>
-      
-      
+      </p> 
       <p style="color: #538DEE;">
         where: {{event.getLocation()}}
         <!-- 				
@@ -51,7 +45,6 @@
 </span>
 -->
       </p>
-      
   </div>
   
   
@@ -64,7 +57,7 @@
       Attend
     </div>
     
-    <div class="tab-item " ng-click="showDetails($index);">
+    <div class="tab-item " ng-click="showDetails($index)">
       
       <i class="icon ion-ios7-information">
         
@@ -78,5 +71,4 @@
   </i>
   </div>
   </ion-content>
-  
 </ion-view>

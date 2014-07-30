@@ -30,14 +30,23 @@
 		<span class="input-label"><i class="icon ion-ios7-clock-outline"></i> End</span> 
 		<input ng-model="event.end" type="time">
 	</div>
-<!-- 	<a class="item item-input" href="#/mapsearch"> -->
-<!-- 		<span class="input-label"><i class="icon ion-ios7-location-outline"></i> Location</span> -->
-<!-- 		<div>{{event.location}}</div> -->
-<!-- 	</a>	 -->
 	<div class="item">
 		<span class="input-label"><i class="icon ion-ios7-location-outline"></i> Location</span>
 		<p><input ng-model="event.location" id="autocomplete-search" type="text"></p>
 	</div>	
+	
+	<div class="item item-input item-select">
+	<span class="input-label">State/Territory</span>
+	<select ng-model="event.state">
+	<option>ACT</option>	
+	<option>NSW</option>
+	<option>VIC</option>
+	<option>QLD</option>
+	<option>WA</option>
+	<option>TAS</option>
+	<option>NT</option>
+	</select>
+	</div>
 	<div class="item item-divider"></div>
 	<div class="item"><span class="input-label"><i class="icon ion-calendar"></i> Description</span>
 	<textarea rows="3" cols="50" ng-model="event.description"></textarea></div>

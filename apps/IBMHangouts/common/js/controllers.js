@@ -88,7 +88,8 @@ hangouts
 		})
 		.controller('NewsfeedCtrl',
 				function($rootScope, $scope, snapRemote,EventService,EventParser,$state) {
-					EventService.retrieve($scope.user).success(function (data) {
+				var filter = {username: $scope.user.username};
+				EventService.getEvents(filter).success(function (data) {
 						if (data) {
 							$scope.events=[];
 							for(var i =0; i<data.length;i++) {
@@ -115,8 +116,6 @@ hangouts
 					$scope.toggleRight = function() {
 						$ionicSideMenuDelegate.toggleRight();
 					};
-					console.log('IN SIDE MENU!')
-					console.log($scope.currEvent);
 					$scope.mapToggleText = "Show Map";
 					$scope.toggleMap = function() {
 						if ($scope.showMap) {

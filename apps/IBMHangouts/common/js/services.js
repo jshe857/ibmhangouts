@@ -1,5 +1,5 @@
-//var restURL = 'https://ibmhangouts.stage1.mybluemix.net';
-var restURL = 'http://localhost:3000';
+var restURL = 'https://ibmhangouts.stage1.mybluemix.net';
+//var restURL = 'http://localhost:3000';
 
 var months = [ 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP',
 		'OCT', 'NOV', 'DEC' ];

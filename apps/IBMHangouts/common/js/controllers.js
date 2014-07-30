@@ -112,9 +112,9 @@ hangouts
 					};
 				})
 		.controller('DetailsCtrl',
-				function($scope, $ionicSideMenuDelegate, $ionicScrollDelegate) {
+				function($scope, snapRemote, $ionicScrollDelegate) {
 					$scope.toggleRight = function() {
-						$ionicSideMenuDelegate.toggleRight();
+						snapRemote.toggle('right');
 					};
 					$scope.mapToggleText = "Show Map";
 					$scope.toggleMap = function() {

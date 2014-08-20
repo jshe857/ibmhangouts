@@ -1,5 +1,23 @@
+<!-- tag template for user profile -->
 <ion-content>
-<div class="list list-inset">
+<div ng-if=showLocation class="list list-inset">
+<h4 class="item item-divider" style="text-align: center;">Show me events in:</h4>
+  <label class="item item-input item-select">
+    <div class="input-label">
+      State:
+    </div>
+    <select ng-model="user.state">
+      <option>ACT</option>
+      <option>NSW</option>
+      <option>NT</option>
+      <option>QLD</option>
+      <option>SA</option>
+      <option>VIC</option>
+      <option>WA</option>
+    </select>
+  </label>
+  </div>
+  <div class="list list-inset">
 	<label class="item item-input"> <i
 		class="icon ion-ios7-cloud positive placeholder-icon"></i> <input
 		type="text" placeholder="Insert More Tags" ng-enter="addToSearch(userSearch)"
@@ -12,7 +30,7 @@
 		<i style="" class="icon ion-close-circled positive"
 			ng-click=deleteTag(tag)></i> <i
 			class="tag positive"> {{tag}} </i>
-
 	</div>
 </div>
+
 </ion-content>

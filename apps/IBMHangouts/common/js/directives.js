@@ -37,7 +37,7 @@ hangouts.directive('ngEnter', function() {
 				}
 			};
 		})
-.directive('loadingScreen', [ '$http', function($http) {
+.directive('loadingScreen', [ '$ionicLoading','$http', function($ionicLoading,$http) {
 	return {
 		restrict : 'A',
 		link : function(scope, elm, attrs) {
@@ -47,9 +47,21 @@ hangouts.directive('ngEnter', function() {
 
 			scope.$watch(scope.isLoading, function(v) {
 				if (v) {
-					elm.removeClass("hidden");
+					$ionicLoading.show({
+					      // The text to display in the loading indicator
+					      content: 'Loading',
+
+					      // The animation to use
+					      animation: 'fade-in',
+
+					      // Will a dark overlay or backdrop cover the entire view
+					      showBackdrop: true,
+					      
+					      
+					      showDelay: 500
+					});
 				} else {
-					elm.addClass("hidden");
+					$ionicLoading.hide();
 				}
 			});
 		}

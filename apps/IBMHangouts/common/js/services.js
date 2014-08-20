@@ -1,9 +1,13 @@
+/*
+ * Change restUrl depending on whether in dev or prod
+ */
+
 var restURL = 'https://ibmhangouts.stage1.mybluemix.net';
 //var restURL = 'http://localhost:3000';
 
-var months = [ 'JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP',
+var months = [ 'N/A','JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP',
 		'OCT', 'NOV', 'DEC' ];
-var fullMonths = [ 'January', 'February', 'March', 'April', 'May', 'June',
+var fullMonths = [ 'N/A','January', 'February', 'March', 'April', 'May', 'June',
 		'July', 'August', 'September', 'October', 'November', 'December' ];
 
 var weekday = [ "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
@@ -50,7 +54,7 @@ hangouts.factory('TagListFactory', function($http) {
 					} else {
 						return 'TBD';
 					}
-				}
+				};
 				this.getTitle = function() {
 					if (typeof event.title != 'undefined') {
 						return event.title;
@@ -165,12 +169,12 @@ hangouts.factory('TagListFactory', function($http) {
 			return $http.post(restURL + '/updateEvent', {
 				event : event
 			});
+		},
+		remove : function(event) {
+			return $http.post(restURL + '/removeEvent', {
+				event:event
+			});
 		}
-	};
-}).factory('EventFactory', function() {
-	return function() {
-		var event = {};
-		return event;
 	};
 }).factory(
 		'GMapsFactory',

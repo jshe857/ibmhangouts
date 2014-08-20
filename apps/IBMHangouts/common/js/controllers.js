@@ -1,13 +1,36 @@
+/*primary data objects stored on server
+ * user: {
+ * username: 'jeshen@au1.ibm.com',
+ * password: '$2a$07$Yg1y9okh4jKDQ2Oh1/3sDe.bSuMKnlxNIQVvdRSYPoJrp1zIZvE02',
+ * name: 'Jeff',
+ * __v: 0,
+ * location: 'QLD',
+ * profileTags: [ 'TAG2', 'MOBILE' ],
+ * searchTags: [ 'TAG1', 'CLOUD' ] }
+ * }
+ *
+ * currEvent {
+  _id: 53f2920eaf6d4d301f0721b1,
+  title: 'Event',
+  start: '1990-10-01T01:01',
+  end: '02:00',
+  location: 'Australia',
+  description: 'Jason can\'t keep up',
+  name: 'Jeff',
+  username: 'jeshen@au1.ibm.com',
+  __v: 0,
+  tags: [ 'cams' ] }
+ *  
+*/
+
 hangouts
 		.controller(
 				'MainCtrl',
 				function($rootScope, $http, EventParser, UserService) {
 					// mock data
-					$rootScope.events = [];
-
+//					$rootScope.events = [];
 					$rootScope.user = {
 					};
-
 				})
 		.controller(
 				'LoginCtrl',
@@ -17,6 +40,7 @@ hangouts
 						if (user && user.username && user.password) {
 							UserService.login(user.username, user.password)
 									.success(function(data) {
+										console.log(data);
 										$rootScope.user = data;
 										if (data.searchTags.length) {
 											$state.go('newsfeed.main');
@@ -65,6 +89,8 @@ hangouts
 					};
 				})
 		.controller('TagSearchCtrl', function($scope, TagListFactory) {
+			//add location field to DOM 
+			$scope.showLocation = true;
 			$scope.user.searchTags = new TagListFactory($scope.user.searchTags);
 			$scope.tags = $scope.user.searchTags;
 			$scope.deleteTag = function(tagName) {
@@ -88,31 +114,34 @@ hangouts
 		})
 		.controller('NewsfeedCtrl',
 				function($rootScope, $scope, snapRemote,EventService,EventParser,$state) {
-				var filter = {username: $scope.user.username};
-				EventService.getEvents(filter).success(function (data) {
+				$scope.getEvents = function() {
+					var filter = {state: $scope.user.state};
+					EventService.getEvents(filter).success(function (data) {
 						if (data) {
-							$scope.events=[];
+							$rootScope.events=[];
 							for(var i =0; i<data.length;i++) {
-								$scope.events.push(new EventParser(data[i]));
+								$rootScope.events.push(new EventParser(data[i]));
 							}
 						}
 					}).error(function(data) {
 						alert(data);
 						$state.go('login');
 					});
-					$scope.toggleLeft = function() {
-						snapRemote.toggle('left');
-					};
-					$scope.toggleRight = function() {
-						snapRemote.toggle('right');
-					};
-					$scope.showDetails = function(index) {
-						$rootScope.currEvent = $scope.events[index];
-						snapRemote.toggle('right');
-					};
-				})
+				};
+				$scope.toggleLeft = function() {
+					snapRemote.toggle('left');
+				};
+				$scope.toggleRight = function() {
+					snapRemote.toggle('right');
+				};
+				$scope.showDetails = function(index) {
+					$rootScope.currEvent = $rootScope.events[index];
+					snapRemote.toggle('right');
+				};
+				$scope.getEvents();
+			})
 		.controller('DetailsCtrl',
-				function($scope, snapRemote, $ionicScrollDelegate) {
+				function($scope, snapRemote, EventService,$state) {
 					$scope.toggleRight = function() {
 						snapRemote.toggle('right');
 					};
@@ -124,17 +153,25 @@ hangouts
 							$scope.mapToggleText = "Hide Map";
 						}
 						$scope.showMap = !$scope.showMap;
-						$ionicScrollDelegate.resize();
 					};
 					$scope.remove = function() {
-						
+							EventService.remove($scope.currEvent.toForm()).success(function(data) {
+								snapRemote.toggle('right');			
+								var index = $scope.events.indexOf($scope.currEvent);
+								$scope.events.splice(index,1);
+								delete $scope.currEvent;
+							}).error(function(data){
+								alert(data);
+								snapRemote.toggle('right');
+							});
 					};
 					
 
 				})
 		.controller(
 				'CreateCtrl',
-				function($scope, $rootScope, $state, GMapsFactory,EventService) {
+				function($scope, $rootScope, $state, 
+						GMapsFactory,EventService) {
 					$scope.createMode="Create";
 					$scope.event = {};
 					var maps = new GMapsFactory();
@@ -150,8 +187,7 @@ hangouts
 								alert(data);
 								$state.go('newsfeed.main');
 							});				
-					};
-					
+					};		
 				})
 		.controller(
 				'EditCtrl',
